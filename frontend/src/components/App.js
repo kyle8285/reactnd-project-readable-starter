@@ -1,50 +1,66 @@
 import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
-import * as Api from '../utils/api';
+import { connect } from 'react-redux';
 import CategoryList from './CategoryList'
 import PostList from './PostList';
 import CreatePostForm from './CreatePostForm';
+import { fetchCategories, fetchPosts } from '../actions';
 
 class App extends Component {
-  state = {
-    categories: [],
-    posts: [],
-  }
-
   componentDidMount() {
-    Api.getAllCategories()
-      .then(categories => this.setState({categories}))
-
-    Api.getAllPosts()
-      .then(posts => this.setState({posts}))
+    this.props.getAllPosts();
+    this.props.getAllCategories();
   }
   render() {
-    console.log(this.state);
+    const {categories, posts} = this.props;
     return (
-      <div className="container">
-        Welcome to Readable!
-        <Route exact path='/' render={() => (
-          <div>
-            <section>
-            <h2>Categories</h2>
-            <CategoryList categories={this.state.categories} />
-            </section>
-            <section>
-            <h2>Posts</h2>
-            <Link to='/post/create'>Create New Post</Link>
-            <PostList posts={this.state.posts} />
-            </section>
-          </div>
-        )}/>
+      <div>
+      {!categories.length || !posts.length
+        ? ( <div>LOADING</div> )
+        : (
+          <div className="container">
+            Welcome to Readable!
+            <Route exact path='/' render={() => (
+              <div>
+                <section>
+                <h2>Categories</h2>
+                <CategoryList categories={categories} />
+                </section>
+                <section>
+                <h2>Posts</h2>
+                <Link to='/post/create'>Create New Post</Link>
+                <PostList posts={posts} />
+                </section>
+              </div>
+            )}/>
 
-        <Route exact path='/post/create' render={() => (
-          <div>
-            <CreatePostForm categories={this.state.categories}/>
+            <Route exact path='/post/create' render={() => (
+              <div>
+                <CreatePostForm categories={categories}/>
+              </div>
+            )}/>
           </div>
-        )}/>
+
+        )
+
+      }
       </div>
     );
   }
 }
 
-export default App;
+function mapStateToProps({categories, posts}) {
+  return {
+    categories: categories.categories,
+    posts: posts.posts,
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getAllPosts: () => dispatch(fetchPosts()),
+    getAllCategories: () => dispatch(fetchCategories()),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
