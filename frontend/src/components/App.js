@@ -33,12 +33,7 @@ class App extends Component {
                 </section>
               </div>
             )}/>
-
-            <Route exact path='/post/create' render={() => (
-              <div>
-                <CreatePostForm categories={categories}/>
-              </div>
-            )}/>
+            <Route exact path='/post/create' component={CreatePostForm}/>
           </div>
 
         )

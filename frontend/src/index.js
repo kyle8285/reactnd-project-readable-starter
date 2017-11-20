@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import App from './components/App';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
@@ -19,10 +19,10 @@ const store = createStore(
 );
 
 ReactDOM.render(
-  <BrowserRouter>
-    <Provider store={store}>
-      <App/>
-    </Provider>
-  </BrowserRouter>,
+  <Provider store={store}>
+    <Router>
+      <Route path='/' component={App}/>
+    </Router>
+  </Provider>,
   document.getElementById('root'));
 registerServiceWorker();

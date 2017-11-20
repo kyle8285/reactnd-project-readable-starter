@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import * as Api from '../utils/api';
+import { connect } from 'react-redux';
+import { addPostApi } from '../actions';
 
 class CreatePostForm extends Component {
   state = {
     title: '',
     body: '',
-    category: 'react',
+    category: '',
   };
 
   handleChange = (e) => {
@@ -17,11 +18,16 @@ class CreatePostForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    const { title, body, category } = this.state;
+    if (!title || !body || !category) {
+      return;
+    }
     const author = 'me';
     const id = `${Math.random().toString(36).substr(2)}${Math.random().toString(36).substr(2)}`;
     const timestamp = Date.now();
-    Api.addPost({...this.state, author, id, timestamp})
-      .then(res => console.log(res))
+    this.props.addPost({
+      title, body, author, category, id, timestamp,
+    });
   }
   render() {
     return (
@@ -48,4 +54,16 @@ class CreatePostForm extends Component {
   }
 }
 
-export default CreatePostForm;
+function mapStateToProps({categories}) {
+  return {
+    categories: categories.categories,
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    addPost: (post) => dispatch(addPostApi(post)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreatePostForm);

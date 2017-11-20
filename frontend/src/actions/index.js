@@ -9,6 +9,11 @@ export const addPost = post => ({
   post,
 });
 
+export const addPostApi = (post) => dispatch => (
+  Api.addPost(post)
+    .then(post => dispatch(addPost(post)))
+);
+
 export const receivePosts = posts => ({
   type: RECEIVE_POSTS,
   posts,
