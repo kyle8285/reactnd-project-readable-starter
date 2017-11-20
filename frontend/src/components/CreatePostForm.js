@@ -56,7 +56,7 @@ class CreatePostForm extends Component {
 
 function mapStateToProps({categories}) {
   return {
-    categories: categories.categories,
+    categories,
   }
 }
 
