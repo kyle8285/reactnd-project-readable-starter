@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import CategoryList from './CategoryList'
 import PostList from './PostList';
 import CreatePostForm from './CreatePostForm';
+import EditPostForm from './EditPostForm';
 import { fetchCategories, fetchPosts } from '../actions';
 
 class App extends Component {
@@ -34,6 +35,7 @@ class App extends Component {
               </div>
             )}/>
             <Route exact path='/post/create' component={CreatePostForm}/>
+            <Route exact path='/post/:id/edit' component={EditPostForm}/>
           </div>
 
         )
