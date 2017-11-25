@@ -10,7 +10,7 @@ const Post = ({post}) => (
     <ul>
       <li>Category: {post.category}</li>
       <li>VoteScore: {post.voteScore}</li>
-      <li>Created: {Date(post.timestamp)}</li>
+      <li>Created: {new Date(post.timestamp).toString()}</li>
     </ul>
   </li>
 )
