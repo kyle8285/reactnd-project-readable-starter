@@ -8,14 +8,18 @@ export const RECEIVE_POST = 'RECEIVE_POST';
 export const EDIT_POST = 'EDIT_POST';
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES';
 
-export const addPost = post => ({
+export const addPost = ({entities, result}) => ({
   type: ADD_POST,
-  post,
+  entities,
+  result,
 });
 
 export const addPostApi = post => dispatch => (
   Api.addPost(post)
-    .then(post => dispatch(addPost(post)))
+    .then(post => {
+      const normalized = normalize(post, postSchema);
+      dispatch(addPost(normalized));
+    })
 );
 
 export const editPostApi = post => dispatch => (

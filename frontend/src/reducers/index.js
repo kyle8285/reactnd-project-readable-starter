@@ -10,16 +10,9 @@ import {
 } from '../actions';
 
 const byId = (state={}, action) => {
-  const { post } = action;
   switch(action.type) {
+    // case RECEIVE_POST:
     case ADD_POST:
-    case RECEIVE_POST:
-      return {
-        ...state,
-        [post.id]: {
-          ...post
-        }
-      }
     case RECEIVE_POSTS:
       if (action.entities) {
         return merge({}, state, action.entities.posts);
@@ -38,7 +31,7 @@ const allIds = (state=[], action) => {
       }
       break;
     case ADD_POST:
-      return [...state, action.id];
+      return [...state, action.result];
     default:
       return state;
   }
