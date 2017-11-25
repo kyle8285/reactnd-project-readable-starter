@@ -1,4 +1,6 @@
+import { normalize } from 'normalizr';
 import * as Api from '../utils/api';
+import { postSchema, postListSchema } from '../schemas/post';
 
 export const ADD_POST = 'ADD_POST';
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
@@ -16,14 +18,18 @@ export const addPostApi = post => dispatch => (
     .then(post => dispatch(addPost(post)))
 );
 
-export const updatePostApi = post => dispatch => (
+export const editPostApi = post => dispatch => (
   Api.editPost(post)
     .then(post => dispatch(editPost(post)))
+  // .then(post => {
+  //   const normalized = normalize(post, postSchema);
+  // })
 );
 
-export const receivePosts = posts => ({
+export const receivePosts = ({entities, result}) => ({
   type: RECEIVE_POSTS,
-  posts,
+  entities,
+  result,
 });
 
 export const receivePost = post => ({
@@ -38,7 +44,10 @@ export const editPost = post => ({
 
 export const fetchPosts = () => dispatch => (
   Api.getAllPosts()
-    .then(posts => dispatch(receivePosts(posts)))
+    .then(posts => {
+      const normalized = normalize(posts, postListSchema);
+      dispatch(receivePosts(normalized));
+    })
 );
 
 export const fetchPost = postId => dispatch => (

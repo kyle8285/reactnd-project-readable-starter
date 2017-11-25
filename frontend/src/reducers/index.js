@@ -1,4 +1,6 @@
 import { combineReducers } from 'redux';
+import merge from 'lodash/merge';
+
 import {
   RECEIVE_CATEGORIES,
   RECEIVE_POSTS,
@@ -7,31 +9,40 @@ import {
   EDIT_POST,
 } from '../actions';
 
-function posts(state=[], action) {
+const byId = (state={}, action) => {
+  const { post } = action;
+  switch(action.type) {
+    case ADD_POST:
+    case RECEIVE_POST:
+      return {
+        ...state,
+        [post.id]: {
+          ...post
+        }
+      }
+    case RECEIVE_POSTS:
+      if (action.entities) {
+        return merge({}, state, action.entities.posts);
+      }
+      break;
+    default:
+      return state;
+
+  }
+}
+const allIds = (state=[], action) => {
   switch(action.type) {
     case RECEIVE_POSTS:
-      const {posts} = action;
-      return [...state, ...posts];
+      if (action.result) {
+        return [...state, ...action.result];
+      }
+      break;
     case ADD_POST:
-      const {post} = action;
-      return [...state, post];
+      return [...state, action.id];
     default:
       return state;
   }
 }
-
-function post(state={}, action) {
-  const {post} = action;
-  switch(action.type) {
-    case RECEIVE_POST:
-      return {...state, ...post};
-    case EDIT_POST:
-      return {...state, ...post};
-    default:
-      return state;
-  }
-}
-
 function categories(state=[], action) {
   switch(action.type) {
     case RECEIVE_CATEGORIES:
@@ -44,6 +55,6 @@ function categories(state=[], action) {
 
 export default combineReducers({
   categories,
-  posts,
-  post,
+  byId,
+  allIds,
 });
