@@ -26,6 +26,17 @@ export const addPost = post =>
     body: JSON.stringify(post)
   }).then(res => res.json())
 
+export const voteForPost = (postId, vote) =>
+  fetch(`${apiUrl}/posts/${postId}`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({option: vote})
+  }).then(res => res.json())
+    .then(data => data)
+
 export const editPost = post =>
   fetch(`${apiUrl}/posts/${post.id}`, {
     method: 'PUT',

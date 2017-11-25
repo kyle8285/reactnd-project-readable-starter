@@ -65,6 +65,16 @@ export const fetchPost = postId => dispatch => (
   })
 );
 
+export const voteForPost = (postId, vote) => dispatch => (
+  Api.voteForPost(postId, vote)
+    .then(post => {
+      console.log(post);
+      const normalized = normalize(post, postSchema);
+      console.log(normalized);
+      dispatch(receivePost(normalized));
+  })
+);
+
 export const receiveCategories = categories => ({
   type: RECEIVE_CATEGORIES,
   categories,

@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+import VoteScore from './VoteScore';
+
 const Post = ({post}) => (
   <li>
     <h3>{post.title}</h3>
@@ -9,7 +11,10 @@ const Post = ({post}) => (
     <h4>{post.author}</h4>
     <ul>
       <li>Category: {post.category}</li>
-      <li>VoteScore: {post.voteScore}</li>
+      <li>
+        VoteScore: {post.voteScore}
+        <VoteScore post={post}/>
+      </li>
       <li>Created: {new Date(post.timestamp).toString()}</li>
     </ul>
   </li>
