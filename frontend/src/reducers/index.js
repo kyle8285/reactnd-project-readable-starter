@@ -4,7 +4,8 @@ import {
   RECEIVE_POSTS,
   RECEIVE_POST,
   ADD_POST,
-  UPDATE_POST, } from '../actions';
+  EDIT_POST,
+} from '../actions';
 
 function posts(state=[], action) {
   switch(action.type) {
@@ -24,7 +25,7 @@ function post(state={}, action) {
   switch(action.type) {
     case RECEIVE_POST:
       return {...state, ...post};
-    case UPDATE_POST:
+    case EDIT_POST:
       return {...state, ...post};
     default:
       return state;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPost, updatePostApi } from '../actions';
+import { fetchPost, editPost } from '../actions';
 
 class EditPostForm extends Component {
   state = {
@@ -33,7 +33,7 @@ class EditPostForm extends Component {
       return;
     }
     const timestamp = Date.now(); //update the timestamp?
-    this.props.updatePost({
+    this.props.editPost({
       title, body, category, author, id, timestamp,
     });
   }
@@ -72,8 +72,8 @@ function mapStateToProps({post, categories}, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    getPost: (postId) => dispatch(fetchPost(postId)),
-    updatePost: (post) => dispatch(updatePostApi(post)),
+    getPost: postId => dispatch(fetchPost(postId)),
+    editPost: post => dispatch(editPost(post)),
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(EditPostForm);

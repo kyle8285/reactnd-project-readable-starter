@@ -26,7 +26,7 @@ export const addPost = post =>
     body: JSON.stringify(post)
   }).then(res => res.json())
 
-export const updatePost = post =>
+export const editPost = post =>
   fetch(`${apiUrl}/posts/${post.id}`, {
     method: 'PUT',
     headers: {
