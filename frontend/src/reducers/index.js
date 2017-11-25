@@ -11,8 +11,9 @@ import {
 
 const byId = (state={}, action) => {
   switch(action.type) {
-    // case RECEIVE_POST:
+    case RECEIVE_POST:
     case ADD_POST:
+    case EDIT_POST:
     case RECEIVE_POSTS:
       if (action.entities) {
         return merge({}, state, action.entities.posts);

@@ -24,10 +24,10 @@ export const addPostApi = post => dispatch => (
 
 export const editPostApi = post => dispatch => (
   Api.editPost(post)
-    .then(post => dispatch(editPost(post)))
-  // .then(post => {
-  //   const normalized = normalize(post, postSchema);
-  // })
+  .then(post => {
+    const normalized = normalize(post, postSchema);
+    dispatch(editPost(normalized));
+  })
 );
 
 export const receivePosts = ({entities, result}) => ({
@@ -36,14 +36,16 @@ export const receivePosts = ({entities, result}) => ({
   result,
 });
 
-export const receivePost = post => ({
+export const receivePost = ({entities, result}) => ({
   type: RECEIVE_POST,
-  post,
+  entities,
+  result,
 });
 
-export const editPost = post => ({
+export const editPost = ({entities, result}) => ({
   type: EDIT_POST,
-  post,
+  entities,
+  result,
 });
 
 export const fetchPosts = () => dispatch => (
@@ -56,7 +58,11 @@ export const fetchPosts = () => dispatch => (
 
 export const fetchPost = postId => dispatch => (
   Api.getPost(postId)
-    .then(post => dispatch(receivePost(post)))
+  .then(post => {
+      const normalized = normalize(post, postSchema);
+      dispatch(receivePost(normalized));
+
+  })
 );
 
 export const receiveCategories = categories => ({

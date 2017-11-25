@@ -46,10 +46,10 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps({allIds, byId, categories}) {
   return {
-    categories: state.categories,
-    posts: state.allIds.map(id => state.byId[id])
+    categories,
+    posts: allIds.map(id => byId[id])
   }
 }
 
