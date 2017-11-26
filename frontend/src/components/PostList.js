@@ -5,7 +5,7 @@ import Post from './Post';
 class PostList extends Component {
 
   state = {
-    orderBy: 'timestamp',
+    orderBy: 'voteScore',
     order: 'desc',
   }
 
