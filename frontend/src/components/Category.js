@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const Category = ({category}) => (
   <li>
-    {category.name}
+    <Link to={`/category/${category.path}`}>{category.name}</Link>
   </li>
 )
 

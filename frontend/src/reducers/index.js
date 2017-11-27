@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import merge from 'lodash/merge';
+import uniq from 'lodash/uniq';
 
 import {
   RECEIVE_CATEGORIES,
@@ -28,7 +29,10 @@ const allIds = (state=[], action) => {
   switch(action.type) {
     case RECEIVE_POSTS:
       if (action.result) {
-        return [...state, ...action.result];
+        return uniq([
+          ...state,
+          ...action.result
+        ]);
       }
       break;
     case ADD_POST:
