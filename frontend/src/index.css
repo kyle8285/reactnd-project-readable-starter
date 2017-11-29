@@ -22,6 +22,22 @@ ul {
   padding: 0px;
 }
 
+input,
+textarea {
+  border: 1px solid;
+  border-radius: 3px;
+  padding: 8px;
+  width: 100%;
+}
+
+.btn-icon {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0px;
+  font-size: inherit;
+}
+
 .container {
   max-width: 900px;
 }

@@ -9,6 +9,7 @@ export const ADD_POST = 'ADD_POST';
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
 export const RECEIVE_POST = 'RECEIVE_POST';
 export const EDIT_POST = 'EDIT_POST';
+export const DELETE_POST = 'DELETE_POST';
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS';
@@ -66,16 +67,27 @@ export const fetchPost = postId => dispatch => (
   .then(post => {
       const normalized = normalize(post, postSchema);
       dispatch(receivePost(normalized));
-
   })
 );
+
+export const deletePostApi = postId => dispatch => (
+  Api.deletePost(postId)
+  .then(post => {
+      const normalized = normalize(post, postSchema);
+      dispatch(deletePost(normalized));
+  })
+);
+
+export const deletePost = ({entities, result}) => ({
+  type: DELETE_POST,
+  entities,
+  result,
+});
 
 export const voteForPost = (postId, vote) => dispatch => (
   Api.voteForPost(postId, vote)
     .then(post => {
-      console.log(post);
       const normalized = normalize(post, postSchema);
-      console.log(normalized);
       dispatch(receivePost(normalized));
   })
 );
@@ -94,7 +106,6 @@ export const addCommentApi = comment => dispatch => (
   Api.addComment(comment)
   .then(comment => {
     const normalized = normalize(comment, commentSchema);
-    console.log(normalized);
     dispatch(addComment(normalized));
   })
 );
@@ -109,7 +120,6 @@ export const getCommentsApi = postId => dispatch => {
   Api.getComments(postId)
     .then(comments => {
       const normalized = normalize(comments, commentListSchema);
-      console.log(normalized);
       dispatch(receiveComments(normalized));
     })
 };

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchPost, getCommentsApi } from '../actions';
+import { fetchPost, getCommentsApi, deletePostApi } from '../actions';
 import CommentForm from './CommentForm';
+import { MdEdit, MdDelete } from 'react-icons/lib/md';
 
 class PostDetails extends Component {
   state = {
@@ -11,6 +13,8 @@ class PostDetails extends Component {
   showCommentForm = () => this.setState({
     showCommentForm: true
   })
+
+  handleDelete = postId => this.props.deletePost(postId)
 
   componentDidMount() {
     this.props.getPost(this.props.match.params.id);
@@ -25,7 +29,11 @@ class PostDetails extends Component {
       {post
         ? (
           <div>
-            <h3>{post.title}</h3>
+            <h3 className='title'>{post.title}</h3>
+            <Link to={`/post/${post.id}/edit`}><MdEdit/></Link>
+            <button className='btn-icon' onClick={this.handleDelete.bind(this, post.id)}>
+              <MdDelete/>
+            </button>
             <p>Author: {post.author}</p>
             <p>Category: {post.category}</p>
             <p>Last Updated: {post.datetime}</p>
@@ -63,7 +71,9 @@ function mapStateToProps({byId, categories, commentsById}, ownProps) {
 function mapDispatchToProps(dispatch) {
   return {
     getPost: postId => dispatch(fetchPost(postId)),
+    deletePost: postId => dispatch(deletePostApi(postId)),
     getComments: postId => dispatch(getCommentsApi(postId)),
   }
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(PostDetails);

@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
-import merge from 'lodash/merge';
-import uniq from 'lodash/uniq';
+import { merge, uniq, omit, without } from 'lodash';
 
 import {
   RECEIVE_CATEGORIES,
@@ -8,6 +7,7 @@ import {
   RECEIVE_POST,
   ADD_POST,
   EDIT_POST,
+  DELETE_POST,
   ADD_COMMENT,
   RECEIVE_COMMENTS,
 } from '../actions';
@@ -20,6 +20,11 @@ const byId = (state={}, action) => {
     case RECEIVE_POSTS:
       if (action.entities) {
         return merge({}, state, action.entities.posts);
+      }
+      break;
+    case DELETE_POST:
+      if (action.entities) {
+        return omit({...state}, Object.keys(action.entities.posts)[0])
       }
       break;
     default:
@@ -72,6 +77,8 @@ const allIds = (state=[], action) => {
       break;
     case ADD_POST:
       return [...state, action.result];
+    case DELETE_POST:
+      return without(state, action.result)
     default:
       return state;
   }
