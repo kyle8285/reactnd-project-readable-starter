@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchPost, getCommentsApi, deletePostApi } from '../actions';
+import Comment from './Comment';
 import CommentForm from './CommentForm';
 import { MdEdit, MdDelete } from 'react-icons/lib/md';
 
@@ -22,8 +23,9 @@ class PostDetails extends Component {
   }
 
   render() {
-    const {post, comments} = this.props;
     const {showCommentForm} = this.state;
+    const {post, comments} = this.props;
+    const sortedComments = [...comments].sort((a,b) => a.timestamp < b.timestamp);
     return (
       <div>
       {post
@@ -40,15 +42,8 @@ class PostDetails extends Component {
             <p>VoteScore: {post.voteScore}</p>
             <p>{post.body}</p>
             <button onClick={this.showCommentForm}>Add Comment</button>
-            {comments.map(comment => (
-              <div key={comment.id}>
-                <p>{comment.body}</p>
-                <p>{comment.author}</p>
-                <p>{new Date(comment.timestamp).toString()}</p>
-                <p>{comment.voteScore}</p>
-              </div>
-            ))}
             {showCommentForm && <CommentForm postId={post.id}/>}
+            {sortedComments.map(comment => <Comment key={comment.id} comment={comment}/>)}
           </div>
         ) : (
           <div>No post available</div>

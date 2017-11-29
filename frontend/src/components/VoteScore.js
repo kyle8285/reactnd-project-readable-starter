@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { MdArrowDownward, MdArrowUpward } from 'react-icons/lib/md';
-import { voteForPost } from '../actions';
+import { voteForPost, voteForComment } from '../actions';
 
 class VoteScore extends Component {
 
   handleVote = (vote) => {
-    if (this.props.post) {
-      this.props.voteForPost(this.props.post.id, vote);
-    } else if (this.props.comment) {
-      this.props.voteForComment(vote);
+    const {post,comment,voteForPost, voteForComment} = this.props;
+    if (post) {
+      voteForPost(post.id, vote);
+    } else if (comment) {
+      voteForComment(comment.id, vote);
     }
   }
   render() {
     return (
       <span>
-        <MdArrowUpward onClick={() => this.handleVote('upVote')} className='md-arrow-upward'/>
-        <MdArrowDownward onClick={() => this.handleVote('downVote')} className='md-arrow-downward'/>
+        <MdArrowUpward onClick={this.handleVote.bind(this,'upVote')} className='md-arrow-upward'/>
+        <MdArrowDownward onClick={this.handleVote.bind(this,'downVote')} className='md-arrow-downward'/>
       </span>
     )
   }
@@ -25,7 +26,7 @@ class VoteScore extends Component {
 function mapDispatchToProps(dispatch) {
   return {
     voteForPost: (postId, vote) => dispatch(voteForPost(postId, vote)),
-    // voteOnComment: (commentId, vote) => dispatch(voteOnComment(commentId, vote)),
+    voteForComment: (commentId, vote) => dispatch(voteForComment(commentId, vote)),
   }
 }
 

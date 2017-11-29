@@ -54,3 +54,19 @@ textarea {
 .md-arrow-downward {
   fill: red;
 }
+
+.small {
+  font-size: .85em;
+}
+
+.comment-time {
+  font-weight: 200;
+}
+
+.comment-author {
+  font-weight: 500;
+}
+
+.comment-body {
+  padding-left: 16px;
+}

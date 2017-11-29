@@ -92,6 +92,14 @@ export const voteForPost = (postId, vote) => dispatch => (
   })
 );
 
+export const voteForComment = (commentId, vote) => dispatch => (
+  Api.voteForComment(commentId, vote)
+    .then(comment => {
+      const normalized = normalize(comment, commentSchema);
+      dispatch(addComment(normalized));
+  })
+);
+
 export const receiveCategories = categories => ({
   type: RECEIVE_CATEGORIES,
   categories,
