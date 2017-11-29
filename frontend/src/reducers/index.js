@@ -8,6 +8,8 @@ import {
   RECEIVE_POST,
   ADD_POST,
   EDIT_POST,
+  ADD_COMMENT,
+  RECEIVE_COMMENTS,
 } from '../actions';
 
 const byId = (state={}, action) => {
@@ -22,9 +24,42 @@ const byId = (state={}, action) => {
       break;
     default:
       return state;
-
   }
 }
+
+const commentsById = (state={}, action) => {
+  switch(action.type) {
+    case ADD_COMMENT:
+    case RECEIVE_COMMENTS:
+      if (action.entities) {
+        return merge({}, state, action.entities.comments);
+      }
+      break;
+    default:
+      return state;
+  }
+}
+
+const commentsAllIds = (state=[], action) => {
+  switch(action.type) {
+    case RECEIVE_COMMENTS:
+      if (action.result) {
+        return uniq([
+          ...state,
+          ...action.result
+        ]);
+      }
+      break;
+    case ADD_COMMENT:
+      if (action.result) {
+        return [...state, action.result];
+      }
+      break;
+    default:
+      return state;
+  }
+}
+
 const allIds = (state=[], action) => {
   switch(action.type) {
     case RECEIVE_POSTS:
@@ -55,4 +90,6 @@ export default combineReducers({
   categories,
   byId,
   allIds,
+  commentsById,
+  commentsAllIds,
 });

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import CategoryList from './CategoryList'
 import PostList from './PostList';
 import CreatePostForm from './CreatePostForm';
 import EditPostForm from './EditPostForm';
+import PostDetails from './PostDetails';
 import { fetchCategories } from '../actions';
 
 class App extends Component {
@@ -14,11 +15,16 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-        Welcome to Readable!
+        <Route path='/' render={() => (
+          <div>
+            Welcome to <Link to='/'>Readable</Link>
+          </div>
+        )}/>
         <Route path='/' component={CategoryList}/>
         <Route exact path='/' component={PostList}/>
         <Route exact path='/category/:category' component={PostList}/>
         <Route exact path='/post/create' component={CreatePostForm}/>
+        <Route exact path='/post/:id' component={PostDetails}/>
         <Route exact path='/post/:id/edit' component={EditPostForm}/>
       </div>
     )

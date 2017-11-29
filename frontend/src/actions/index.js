@@ -1,12 +1,17 @@
 import { normalize } from 'normalizr';
 import * as Api from '../utils/api';
-import { postSchema, postListSchema } from '../schemas/post';
+import { postSchema,
+          postListSchema,
+          commentSchema,
+          commentListSchema } from '../schemas/post';
 
 export const ADD_POST = 'ADD_POST';
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
 export const RECEIVE_POST = 'RECEIVE_POST';
 export const EDIT_POST = 'EDIT_POST';
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES';
+export const ADD_COMMENT = 'ADD_COMMENT';
+export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS';
 
 export const addPost = ({entities, result}) => ({
   type: ADD_POST,
@@ -84,3 +89,33 @@ export const fetchCategories = () => dispatch => (
   Api.getAllCategories()
     .then(categories => dispatch(receiveCategories(categories)))
 );
+
+export const addCommentApi = comment => dispatch => (
+  Api.addComment(comment)
+  .then(comment => {
+    const normalized = normalize(comment, commentSchema);
+    console.log(normalized);
+    dispatch(addComment(normalized));
+  })
+);
+
+export const addComment = ({entities, result}) => ({
+  type: ADD_COMMENT,
+  entities,
+  result,
+});
+
+export const getCommentsApi = postId => dispatch => {
+  Api.getComments(postId)
+    .then(comments => {
+      const normalized = normalize(comments, commentListSchema);
+      console.log(normalized);
+      dispatch(receiveComments(normalized));
+    })
+};
+
+export const receiveComments = ({entities, result}) => ({
+  type: RECEIVE_COMMENTS,
+  entities,
+  result,
+});

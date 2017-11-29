@@ -7,11 +7,13 @@ import VoteScore from './VoteScore';
 
 const Post = ({post}) => (
   <li>
-    <h3 className='title'>{post.title}</h3>
+    <h3 className='title'>
+      <Link to={`/post/${post.id}`}>{post.title}</Link>
+    </h3>
     <Link to={`/post/${post.id}/edit`}><MdEdit/> Edit</Link>
     <p>{new Date(post.timestamp).toString()} by {post.author}</p>
     <ul>
-      <li>Category: {post.category}</li>
+      <li>{`In ${post.category} with ${post.commentCount} comments`}</li>
       <li>
         VoteScore: {post.voteScore}
         <VoteScore post={post}/>
