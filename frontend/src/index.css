@@ -59,6 +59,21 @@ textarea {
   font-size: .85em;
 }
 
+.post-detail .btn-icon,
+.post-detail .link-icon {
+  margin-left: 8px;
+}
+
+.comment {
+  margin-top: 16px;
+  padding: 16px;
+  border-top: 1px solid;
+}
+
+.comment .btn-icon {
+  margin-left: 8px;
+}
+
 .comment-time {
   font-weight: 200;
 }

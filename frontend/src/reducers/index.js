@@ -9,6 +9,7 @@ import {
   EDIT_POST,
   DELETE_POST,
   ADD_COMMENT,
+  EDIT_COMMENT,
   RECEIVE_COMMENTS,
 } from '../actions';
 
@@ -35,6 +36,7 @@ const byId = (state={}, action) => {
 const commentsById = (state={}, action) => {
   switch(action.type) {
     case ADD_COMMENT:
+    case EDIT_COMMENT:
     case RECEIVE_COMMENTS:
       if (action.entities) {
         return merge({}, state, action.entities.comments);

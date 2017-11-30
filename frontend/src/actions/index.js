@@ -12,6 +12,7 @@ export const EDIT_POST = 'EDIT_POST';
 export const DELETE_POST = 'DELETE_POST';
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES';
 export const ADD_COMMENT = 'ADD_COMMENT';
+export const EDIT_COMMENT = 'EDIT_COMMENT';
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS';
 
 export const addPost = ({entities, result}) => ({
@@ -120,6 +121,20 @@ export const addCommentApi = comment => dispatch => (
 
 export const addComment = ({entities, result}) => ({
   type: ADD_COMMENT,
+  entities,
+  result,
+});
+
+export const editCommentApi = comment => dispatch => (
+  Api.editComment(comment)
+  .then(comment => {
+    const normalized = normalize(comment, commentSchema);
+    dispatch(editComment(normalized));
+  })
+);
+
+export const editComment = ({entities, result}) => ({
+  type: EDIT_COMMENT,
   entities,
   result,
 });

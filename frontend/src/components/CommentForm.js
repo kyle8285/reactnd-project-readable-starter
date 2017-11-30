@@ -40,16 +40,10 @@ class CommentForm extends Component {
   }
 }
 
-function mapStateToProps({commentsById, commentsAllIds}, ownProps) {
-  return {
-
-  }
-}
-
 function mapDispatchToProps(dispatch) {
   return {
     addComment: comment => dispatch(addCommentApi(comment)),
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CommentForm);
+export default connect(null, mapDispatchToProps)(CommentForm);

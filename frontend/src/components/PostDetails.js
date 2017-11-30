@@ -30,9 +30,11 @@ class PostDetails extends Component {
       <div>
       {post
         ? (
-          <div>
+          <div className='post-detail'>
             <h3 className='title'>{post.title}</h3>
-            <Link to={`/post/${post.id}/edit`}><MdEdit/></Link>
+            <Link className='link-icon' to={`/post/${post.id}/edit`}>
+              <MdEdit/>
+            </Link>
             <button className='btn-icon' onClick={this.handleDelete.bind(this, post.id)}>
               <MdDelete/>
             </button>

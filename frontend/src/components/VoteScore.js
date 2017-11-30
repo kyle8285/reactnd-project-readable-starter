@@ -16,8 +16,8 @@ class VoteScore extends Component {
   render() {
     return (
       <span>
-        <MdArrowUpward onClick={this.handleVote.bind(this,'upVote')} className='md-arrow-upward'/>
         <MdArrowDownward onClick={this.handleVote.bind(this,'downVote')} className='md-arrow-downward'/>
+        <MdArrowUpward onClick={this.handleVote.bind(this,'upVote')} className='md-arrow-upward'/>
       </span>
     )
   }
