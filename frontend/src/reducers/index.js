@@ -12,6 +12,7 @@ import {
   EDIT_COMMENT,
   DELETE_COMMENT,
   RECEIVE_COMMENTS,
+  RECEIVE_COMMENT,
 } from '../actions';
 
 const byId = (state={}, action) => {
@@ -37,7 +38,6 @@ const byId = (state={}, action) => {
         [postId]: state[postId],
         commentCount: state[postId].commentCount--
       }
-      break;
     case ADD_COMMENT:
       postId = Object.values(action.entities.comments)[0].parentId;
       return {
@@ -45,7 +45,6 @@ const byId = (state={}, action) => {
         [postId]: state[postId],
         commentCount: state[postId].commentCount++
       }
-      break;
     default:
       return state;
   }
@@ -55,6 +54,7 @@ const commentsById = (state={}, action) => {
   switch(action.type) {
     case ADD_COMMENT:
     case EDIT_COMMENT:
+    case RECEIVE_COMMENT:
     case RECEIVE_COMMENTS:
       if (action.entities) {
         return merge({}, state, action.entities.comments);
@@ -72,6 +72,7 @@ const commentsById = (state={}, action) => {
 
 const commentsAllIds = (state=[], action) => {
   switch(action.type) {
+    case RECEIVE_COMMENT:
     case RECEIVE_COMMENTS:
       if (action.result) {
         return uniq([

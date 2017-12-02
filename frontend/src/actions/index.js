@@ -15,6 +15,7 @@ export const ADD_COMMENT        = 'ADD_COMMENT';
 export const EDIT_COMMENT       = 'EDIT_COMMENT';
 export const DELETE_COMMENT     = 'DELETE_COMMENT';
 export const RECEIVE_COMMENTS   = 'RECEIVE_COMMENTS';
+export const RECEIVE_COMMENT    = 'RECEIVE_COMMENT';
 
 export const addPost = ({entities, result}) => ({
   type: ADD_POST,
@@ -98,9 +99,15 @@ export const voteForComment = (commentId, vote) => dispatch => (
   Api.voteForComment(commentId, vote)
     .then(comment => {
       const normalized = normalize(comment, commentSchema);
-      dispatch(addComment(normalized));
+      dispatch(receiveComment(normalized));
   })
 );
+
+export const receiveComment = ({entities, result}) => ({
+  type: RECEIVE_COMMENT,
+  entities,
+  result
+});
 
 export const receiveCategories = categories => ({
   type: RECEIVE_CATEGORIES,
