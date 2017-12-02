@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { fetchPost, getCommentsApi, deletePostApi } from '../actions';
 import Comment from './Comment';
 import CommentForm from './CommentForm';
+import VoteScore from './VoteScore';
 import { MdEdit, MdDelete } from 'react-icons/lib/md';
 
 class PostDetails extends Component {
@@ -43,8 +44,8 @@ class PostDetails extends Component {
             </button>
             <p>Author: {post.author}</p>
             <p>Category: {post.category}</p>
-            <p>Last Updated: {post.datetime}</p>
-            <p>VoteScore: {post.voteScore}</p>
+            <p>Last Updated: {new Date(post.timestamp).toString()}</p>
+            <p>{post.voteScore} <VoteScore post={post}/></p>
             <p>{post.commentCount} Comment{post.commentCount !== 1 && <span>s</span>}</p>
             <p>{post.body}</p>
             <button onClick={this.toggleAddComment}>Add Comment</button>
