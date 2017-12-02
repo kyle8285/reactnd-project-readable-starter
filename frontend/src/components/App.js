@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import CategoryList from './CategoryList'
 import PostList from './PostList';
@@ -23,8 +23,10 @@ class App extends Component {
         <Route path='/' component={CategoryList}/>
         <Route exact path='/' component={PostList}/>
         <Route exact path='/category/:category' component={PostList}/>
-        <Route exact path='/post/create' component={CreatePostForm}/>
-        <Route exact path='/post/:id' component={PostDetails}/>
+        <Switch>
+          <Route exact path='/post/create' component={CreatePostForm}/>
+          <Route exact path='/post/:id' component={PostDetails}/>
+        </Switch>
         <Route exact path='/post/:id/edit' component={EditPostForm}/>
       </div>
     )
