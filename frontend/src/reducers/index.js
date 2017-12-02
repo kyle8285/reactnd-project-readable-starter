@@ -15,6 +15,7 @@ import {
 } from '../actions';
 
 const byId = (state={}, action) => {
+  let postId;
   switch(action.type) {
     case RECEIVE_POST:
     case ADD_POST:
@@ -27,6 +28,22 @@ const byId = (state={}, action) => {
     case DELETE_POST:
       if (action.entities) {
         return omit({...state}, Object.keys(action.entities.posts)[0]);
+      }
+      break;
+    case DELETE_COMMENT:
+      postId = Object.values(action.entities.comments)[0].parentId;
+      return {
+        ...state,
+        [postId]: state[postId],
+        commentCount: state[postId].commentCount--
+      }
+      break;
+    case ADD_COMMENT:
+      postId = Object.values(action.entities.comments)[0].parentId;
+      return {
+        ...state,
+        [postId]: state[postId],
+        commentCount: state[postId].commentCount++
       }
       break;
     default:

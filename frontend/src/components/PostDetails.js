@@ -15,7 +15,10 @@ class PostDetails extends Component {
     addComment: !this.state.addComment
   })
 
-  handleDelete = postId => this.props.deletePost(postId)
+  handleDelete = postId => {
+    const result = window.confirm('Are you sure you want to delete this post?');
+    if (result) this.props.deletePost(postId);
+  }
 
   componentDidMount() {
     this.props.getPost(this.props.match.params.id);
@@ -42,6 +45,7 @@ class PostDetails extends Component {
             <p>Category: {post.category}</p>
             <p>Last Updated: {post.datetime}</p>
             <p>VoteScore: {post.voteScore}</p>
+            <p>{post.commentCount} Comment{post.commentCount !== 1 && <span>s</span>}</p>
             <p>{post.body}</p>
             <button onClick={this.toggleAddComment}>Add Comment</button>
             {addComment && <button onClick={this.toggleAddComment}>Cancel</button>}
@@ -49,7 +53,7 @@ class PostDetails extends Component {
             {sortedComments.map(comment => <Comment key={comment.id} comment={comment}/>)}
           </div>
         ) : (
-          <div>No post available</div>
+          <div>Oops! This post is no longer available.</div>
         )}
       </div>
     )
