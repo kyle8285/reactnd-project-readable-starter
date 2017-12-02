@@ -10,7 +10,7 @@ class Comment extends Component {
     editComment: false,
   };
 
-  toggleEdit = () => this.setState({
+  toggleEditComment = () => this.setState({
     editComment: !this.state.editComment
   });
 
@@ -30,7 +30,7 @@ class Comment extends Component {
         </div>
         <div>
           <span>{comment.voteScore}</span> <VoteScore comment={comment}/>
-          <button className='btn-icon' onClick={this.toggleEdit}>
+          <button className='btn-icon' onClick={this.toggleEditComment}>
             <MdEdit/>
           </button>
           <button className='btn-icon' onClick={this.handleDelete.bind(this, comment.id)}>
@@ -38,7 +38,7 @@ class Comment extends Component {
           </button>
         </div>
         {editComment
-          ? <EditCommentForm comment={comment} onSuccess={this.toggleEdit}/>
+          ? <EditCommentForm comment={comment} onSuccess={this.toggleEditComment}/>
           : <p className='comment-body'>{comment.body}</p>
         }
       </div>
