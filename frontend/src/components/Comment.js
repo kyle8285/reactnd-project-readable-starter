@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import VoteScore from './VoteScore';
 import EditCommentForm from './EditCommentForm';
+import { deleteCommentApi } from '../actions';
 import { MdEdit, MdDelete } from 'react-icons/lib/md';
 
 class Comment extends Component {
@@ -13,7 +15,8 @@ class Comment extends Component {
   });
 
   handleDelete = commentId => {
-
+    const result = window.confirm('Are you sure you want to delete this comment?');
+    if (result) this.props.deleteComment(commentId);
   }
 
   render() {
@@ -43,4 +46,10 @@ class Comment extends Component {
   }
 }
 
-export default Comment;
+function mapDispatchToProps(dispatch) {
+  return {
+    deleteComment: commentId => dispatch(deleteCommentApi(commentId)),
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Comment);

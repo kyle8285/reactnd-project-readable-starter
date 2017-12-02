@@ -21,17 +21,16 @@ class CommentForm extends Component {
     const timestamp = Date.now();
     const {body} = this.state;
     const author = 'me';
-    this.props.addComment({
-      id, parentId, timestamp, body, author
-    });
-
+    this.props.addComment({id, parentId, timestamp, body, author})
+      .then(() => this.props.onAddCommentSuccess());
   }
+
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
         <label>
           Add Comment:
-          <textarea type="text" name="body" value={this.state.body} onChange={this.handleChange}/>
+          <textarea type="text" name="body" value={this.state.body} onChange={this.handleChange} autoFocus/>
         </label>
         <input type="submit" value="Submit"/>
       </form>

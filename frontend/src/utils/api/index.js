@@ -84,6 +84,12 @@ export const editComment = comment =>
     body: JSON.stringify(comment)
   }).then(res => res.json())
 
+export const deleteComment = commentId =>
+  fetch(`${apiUrl}/comments/${commentId}`, {
+    method: 'DELETE',
+    headers,
+  }).then(res => res.json())
+
 export const getComments = postId =>
   fetch(`${apiUrl}/posts/${postId}/comments`, {headers})
     .then(res => res.json())

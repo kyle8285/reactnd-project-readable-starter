@@ -10,6 +10,7 @@ import {
   DELETE_POST,
   ADD_COMMENT,
   EDIT_COMMENT,
+  DELETE_COMMENT,
   RECEIVE_COMMENTS,
 } from '../actions';
 
@@ -25,7 +26,7 @@ const byId = (state={}, action) => {
       break;
     case DELETE_POST:
       if (action.entities) {
-        return omit({...state}, Object.keys(action.entities.posts)[0])
+        return omit({...state}, Object.keys(action.entities.posts)[0]);
       }
       break;
     default:
@@ -40,6 +41,11 @@ const commentsById = (state={}, action) => {
     case RECEIVE_COMMENTS:
       if (action.entities) {
         return merge({}, state, action.entities.comments);
+      }
+      break;
+    case DELETE_COMMENT:
+      if (action.entities) {
+        return omit({...state}, Object.keys(action.entities.comments)[0]);
       }
       break;
     default:
@@ -60,6 +66,11 @@ const commentsAllIds = (state=[], action) => {
     case ADD_COMMENT:
       if (action.result) {
         return [...state, action.result];
+      }
+      break;
+    case DELETE_COMMENT:
+      if (action.result) {
+        return without(state, action.result);
       }
       break;
     default:

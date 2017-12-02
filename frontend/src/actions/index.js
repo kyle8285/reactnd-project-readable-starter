@@ -5,15 +5,16 @@ import { postSchema,
           commentSchema,
           commentListSchema } from '../schemas/post';
 
-export const ADD_POST = 'ADD_POST';
-export const RECEIVE_POSTS = 'RECEIVE_POSTS';
-export const RECEIVE_POST = 'RECEIVE_POST';
-export const EDIT_POST = 'EDIT_POST';
-export const DELETE_POST = 'DELETE_POST';
+export const ADD_POST           = 'ADD_POST';
+export const RECEIVE_POSTS      = 'RECEIVE_POSTS';
+export const RECEIVE_POST       = 'RECEIVE_POST';
+export const EDIT_POST          = 'EDIT_POST';
+export const DELETE_POST        = 'DELETE_POST';
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES';
-export const ADD_COMMENT = 'ADD_COMMENT';
-export const EDIT_COMMENT = 'EDIT_COMMENT';
-export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS';
+export const ADD_COMMENT        = 'ADD_COMMENT';
+export const EDIT_COMMENT       = 'EDIT_COMMENT';
+export const DELETE_COMMENT     = 'DELETE_COMMENT';
+export const RECEIVE_COMMENTS   = 'RECEIVE_COMMENTS';
 
 export const addPost = ({entities, result}) => ({
   type: ADD_POST,
@@ -139,13 +140,28 @@ export const editComment = ({entities, result}) => ({
   result,
 });
 
-export const getCommentsApi = postId => dispatch => {
+export const deleteCommentApi = commentId => dispatch => (
+  Api.deleteComment(commentId)
+    .then(comment => {
+      const normalized = normalize(comment, commentSchema);
+      dispatch(deleteComment(normalized));
+    }
+  )
+);
+
+export const deleteComment = ({entities, result}) => ({
+  type: DELETE_COMMENT,
+  entities,
+  result,
+});
+
+export const getCommentsApi = postId => dispatch => (
   Api.getComments(postId)
     .then(comments => {
       const normalized = normalize(comments, commentListSchema);
       dispatch(receiveComments(normalized));
     })
-};
+);
 
 export const receiveComments = ({entities, result}) => ({
   type: RECEIVE_COMMENTS,

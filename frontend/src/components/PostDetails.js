@@ -8,11 +8,11 @@ import { MdEdit, MdDelete } from 'react-icons/lib/md';
 
 class PostDetails extends Component {
   state = {
-    showCommentForm: false,
+    addComment: false,
   }
 
-  showCommentForm = () => this.setState({
-    showCommentForm: true
+  toggleAddComment = () => this.setState({
+    addComment: !this.state.addComment
   })
 
   handleDelete = postId => this.props.deletePost(postId)
@@ -23,7 +23,7 @@ class PostDetails extends Component {
   }
 
   render() {
-    const {showCommentForm} = this.state;
+    const {addComment} = this.state;
     const {post, comments} = this.props;
     const sortedComments = [...comments].sort((a,b) => a.timestamp < b.timestamp);
     return (
@@ -43,8 +43,9 @@ class PostDetails extends Component {
             <p>Last Updated: {post.datetime}</p>
             <p>VoteScore: {post.voteScore}</p>
             <p>{post.body}</p>
-            <button onClick={this.showCommentForm}>Add Comment</button>
-            {showCommentForm && <CommentForm postId={post.id}/>}
+            <button onClick={this.toggleAddComment}>Add Comment</button>
+            {addComment && <button onClick={this.toggleAddComment}>Cancel</button>}
+            {addComment && <CommentForm postId={post.id} onAddCommentSuccess={this.toggleAddComment}/>}
             {sortedComments.map(comment => <Comment key={comment.id} comment={comment}/>)}
           </div>
         ) : (
