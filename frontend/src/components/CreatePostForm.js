@@ -48,6 +48,7 @@ class CreatePostForm extends Component {
             <label>
               Category:
               <select name="category" value={this.state.category} onChange={this.handleChange}>
+                <option value={''} disabled>Select a category</option>
                 {this.props.categories.map((category, index) => (
                   <option key={index} value={category.name}>{category.name}</option>
                 ))}

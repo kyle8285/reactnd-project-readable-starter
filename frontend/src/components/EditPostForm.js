@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchPost, editPostApi } from '../actions';
 
@@ -7,6 +8,7 @@ class EditPostForm extends Component {
     title: '',
     category: '',
     body: '',
+    editPostSuccess: false,
   };
 
   componentDidMount() {
@@ -32,33 +34,43 @@ class EditPostForm extends Component {
     if (!title || !body) {
       return;
     }
-    const timestamp = Date.now(); //update the timestamp?
-    this.props.editPost({
-      title, body, category, author, id, timestamp,
-    });
+    const timestamp = Date.now();
+    this.props.editPost({title, body, category, author, id, timestamp})
+      .then(() => this.onEditPostSuccess());
   }
+
+  onEditPostSuccess = () => this.setState({
+    editPostSuccess: true
+  })
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Title:
-          <input type="text" name="title" value={this.state.title} onChange={this.handleChange}/>
-        </label>
-        <label>
-          Category:
-          <select name="category" value={this.state.category} onChange={this.handleChange}>
-            {this.props.categories.map((category, index) => (
-              <option key={index} value={category.name}>{category.name}</option>
-            ))}
-          </select>
-        </label>
-        <label>
-          Body:
-          <textarea type="text" name="body" value={this.state.body} onChange={this.handleChange}/>
-        </label>
-        <input type="submit" value="Submit"/>
-      </form>
+      <div>
+        {!this.state.editPostSuccess
+        ?
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              Title:
+              <input type="text" name="title" value={this.state.title} onChange={this.handleChange}/>
+            </label>
+            <label>
+              Category:
+              <select name="category" value={this.state.category} onChange={this.handleChange}>
+                {this.props.categories.map((category, index) => (
+                  <option key={index} value={category.name}>{category.name}</option>
+                ))}
+              </select>
+            </label>
+            <label>
+              Body:
+              <textarea type="text" name="body" value={this.state.body} onChange={this.handleChange}/>
+            </label>
+            <input type="submit" value="Submit"/>
+          </form>
+        :
+          <Redirect to={`/post/${this.props.match.params.id}`}/>
+        }
+      </div>
     )
   }
 }

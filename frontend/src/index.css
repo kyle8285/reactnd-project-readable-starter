@@ -78,7 +78,7 @@ textarea {
   fill: red;
 }
 
-.small {
+.font-small {
   font-size: .85em;
 }
 
@@ -97,7 +97,7 @@ textarea {
   margin-left: 8px;
 }
 
-.comment-time {
+.weight-light {
   font-weight: 200;
 }
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import VoteScore from './VoteScore';
 import EditCommentForm from './EditCommentForm';
 import { deleteCommentApi } from '../actions';
@@ -26,7 +27,7 @@ class Comment extends Component {
       <div className='comment'>
         <div>
           <span className='comment-author'>{comment.author} </span>
-          <span className='comment-time small'>at {new Date(comment.timestamp).toString()}</span>
+          <span className='weight-light font-small'>at {moment(comment.timestamp).format('lll')}</span>
         </div>
         <div>
           <span>{comment.voteScore}</span> <VoteScore comment={comment}/>

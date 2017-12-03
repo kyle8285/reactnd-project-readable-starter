@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Post from './Post';
 import { fetchPosts } from '../actions';
@@ -54,7 +53,6 @@ class PostList extends Component {
         ) : (
           <div>
             <h2>Posts</h2>
-            <Link to='/post/create'>Create New Post</Link>
             <label>Order By:
               <select value={this.state.orderBy} name='orderBy' onChange={this.handleChange}>
                 <option value='timestamp'>Last Updated</option>
