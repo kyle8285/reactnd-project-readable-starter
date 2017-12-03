@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Post from './Post';
@@ -47,12 +48,15 @@ class PostList extends Component {
 
     return (
       <div>
+        <h2>Posts</h2>
         {!sortedPosts.length
         ? (
-          <div>There are no posts</div>
+          <div>
+            Oops! There are no posts under this category.
+            Click <Link to='/post/create'>here </Link>to post something.
+          </div>
         ) : (
           <div>
-            <h2>Posts</h2>
             <label>Order By:
               <select value={this.state.orderBy} name='orderBy' onChange={this.handleChange}>
                 <option value='timestamp'>Last Updated</option>
