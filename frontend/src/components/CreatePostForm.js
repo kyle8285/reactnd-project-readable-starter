@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
-import { addPostApi } from '../actions';
+import { addPostApi } from '../actions/posts';
 
 class CreatePostForm extends Component {
   state = {

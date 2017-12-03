@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { editCommentApi } from '../actions';
+import { editCommentApi } from '../actions/comments';
 
 class EditCommentForm extends Component {
   state = {}

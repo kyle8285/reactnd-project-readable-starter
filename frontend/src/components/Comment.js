@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { MdEdit, MdDelete } from 'react-icons/lib/md';
 import moment from 'moment';
+
+import { deleteCommentApi } from '../actions/comments';
 import VoteScore from './VoteScore';
 import EditCommentForm from './EditCommentForm';
-import { deleteCommentApi } from '../actions';
-import { MdEdit, MdDelete } from 'react-icons/lib/md';
 
 class Comment extends Component {
   state = {

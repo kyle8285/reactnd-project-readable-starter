@@ -6,7 +6,7 @@ import PostList from './PostList';
 import CreatePostForm from './CreatePostForm';
 import EditPostForm from './EditPostForm';
 import PostDetails from './PostDetails';
-import { fetchCategories } from '../actions';
+import { fetchCategories } from '../actions/categories';
 
 class App extends Component {
   componentDidMount() {

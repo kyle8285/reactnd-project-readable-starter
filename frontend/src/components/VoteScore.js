@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { MdArrowDownward, MdArrowUpward } from 'react-icons/lib/md';
-import { voteForPost, voteForComment } from '../actions';
+
+import { voteForPost } from '../actions/posts';
+import { voteForComment } from '../actions/comments';
 
 class VoteScore extends Component {
 

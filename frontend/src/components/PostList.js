@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Post from './Post';
-import { fetchPosts } from '../actions';
+import { fetchPosts } from '../actions/posts';
 
 class PostList extends Component {
 

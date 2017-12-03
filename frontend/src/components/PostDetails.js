@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { MdEdit, MdDelete } from 'react-icons/lib/md';
 import moment from 'moment';
-import { fetchPost, getCommentsApi, deletePostApi } from '../actions';
+
+import { fetchPost, deletePostApi } from '../actions/posts';
+import { getCommentsApi } from '../actions/comments';
 import Comment from './Comment';
 import CommentForm from './CommentForm';
 import VoteScore from './VoteScore';
-import { MdEdit, MdDelete } from 'react-icons/lib/md';
 
 class PostDetails extends Component {
   state = {

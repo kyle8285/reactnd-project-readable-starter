@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchPost, editPostApi } from '../actions';
+
+import { fetchPost, editPostApi } from '../actions/posts';
 
 class EditPostForm extends Component {
   state = {
