@@ -68,7 +68,6 @@ class PostList extends Component {
 
     return (
       <div>
-        <h2>Posts</h2>
         {!sortedPosts.length
         ? (
           <div>
