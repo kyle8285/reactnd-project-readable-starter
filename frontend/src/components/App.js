@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Route, Link, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import CategoryList from './CategoryList'
+import Navbar from './Navbar';
 import PostList from './PostList';
 import CreatePostForm from './CreatePostForm';
 import EditPostForm from './EditPostForm';
@@ -15,12 +15,7 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-        <Route path='/' render={() => (
-          <div>
-            Welcome to <Link to='/'>Readable</Link>
-          </div>
-        )}/>
-        <Route path='/' component={CategoryList}/>
+        <Route path='/' component={Navbar}/>
         <Route exact path='/' component={PostList}/>
         <Route exact path='/category/:category' component={PostList}/>
         <Switch>

@@ -1,10 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const Category = ({category}) => (
-  <li>
-    <Link to={`/category/${category.path}`}>{category.name}</Link>
+const Category = ({category, match}) => (
+  <li >
+    <NavLink
+      to={`/category/${category.path}`}
+      activeClassName='nav-active'
+    >{category.name}</NavLink>
   </li>
 )
 

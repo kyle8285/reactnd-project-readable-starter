@@ -13,13 +13,18 @@ body {
   margin-bottom: 0px;
 }
 
-p {
-  margin-top: 0px;
-}
-
 ul {
   list-style: none;
   padding: 0px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:visited {
+  color: inherit;
 }
 
 input,
@@ -28,6 +33,24 @@ textarea {
   border-radius: 3px;
   padding: 8px;
   width: 100%;
+}
+
+.navbar li {
+  display: inline-block;
+  margin: 16px;
+}
+
+.navbar li:first-of-type {
+  margin-left: 0px;
+}
+
+.nav-active {
+  font-weight: 600;
+  border-bottom: 1px solid;
+}
+
+.new-post-link {
+  float: right;
 }
 
 .btn-icon {

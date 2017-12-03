@@ -4,12 +4,9 @@ import PropTypes from 'prop-types';
 import Category from './Category';
 
 const CategoryList = ({categories}) => (
-  <div>
-    <h2>Categories</h2>
-    <ul>
-      {categories.length && categories.map(category => <Category key={category.name} category={category} />)}
-    </ul>
-  </div>
+  <ul>
+    {categories.length && categories.map(category => <Category key={category.name} category={category} />)}
+  </ul>
 )
 
 function mapStateToProps({categories}) {
