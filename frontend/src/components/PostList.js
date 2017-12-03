@@ -18,11 +18,29 @@ class PostList extends Component {
   }
 
   orderFunc = () => {
-    const {order, orderBy} = this.state;
-    if (order === 'desc') {
-      return (a,b) => a[orderBy] < b[orderBy];
-    } else if (order === 'asc') {
-      return (a,b) => a[orderBy] > b[orderBy];
+    const {orderBy} = this.state;
+    const numberTypes = [
+      'timestamp', 'voteScore', 'commentCount',
+    ];
+    const letterTypes = [
+      'category', 'author', 'title',
+    ];
+
+    const compareNumbers = (a,b) => b - a;
+    const compareLetters = (a,b) => {
+      if (a < b) {
+        return -1;
+      } else if (a > b) {
+        return 1;
+      } else {
+        return 0;
+      }
+    };
+
+    if (numberTypes.includes(orderBy)) {
+      return (a,b) => compareNumbers(a[orderBy], b[orderBy])
+    } else if (letterTypes.includes(orderBy)) {
+      return (a,b) => compareLetters(a[orderBy].toLowerCase(), b[orderBy].toLowerCase())
     }
   }
 
@@ -41,10 +59,11 @@ class PostList extends Component {
   }
 
   render() {
-    const {posts} = this.props;
-    const orderFunc = this.orderFunc();
-    // TODO: is slicing necessary?
+    const {posts}     = this.props;
+    const {order}     = this.state;
+    const orderFunc   = this.orderFunc();
     const sortedPosts = posts.slice().sort(orderFunc);
+    if (order === 'asc') sortedPosts.reverse();
 
     return (
       <div>
@@ -61,6 +80,10 @@ class PostList extends Component {
               <select value={this.state.orderBy} name='orderBy' onChange={this.handleChange}>
                 <option value='timestamp'>Last Updated</option>
                 <option value='voteScore'>VoteScore</option>
+                <option value='commentCount'>Comment Count</option>
+                <option value='category'>Category</option>
+                <option value='author'>Author</option>
+                <option value='title'>Title</option>
               </select>
             </label>
             <label>Order:
