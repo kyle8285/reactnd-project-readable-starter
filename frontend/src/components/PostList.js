@@ -60,6 +60,7 @@ class PostList extends Component {
 
   render() {
     const {posts}     = this.props;
+    const {category}  = this.props.match.params;
     const {order}     = this.state;
     const orderFunc   = this.orderFunc();
     const sortedPosts = posts.slice().sort(orderFunc);
@@ -72,7 +73,10 @@ class PostList extends Component {
         ? (
           <div>
             Oops! There are no posts under this category.
-            Click <Link to='/post/create'>here </Link>to post something.
+            Click <Link to={{
+              pathname: '/post/create',
+              search: `?category=${category}`,
+            }}>here </Link>to post something.
           </div>
         ) : (
           <div>

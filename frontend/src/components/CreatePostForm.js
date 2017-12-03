@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import queryString from 'query-string';
 import { addPostApi } from '../actions';
 
 class CreatePostForm extends Component {
@@ -34,6 +35,12 @@ class CreatePostForm extends Component {
   onAddPostSuccess = () => this.setState({
     addPostSuccess: true
   })
+
+  componentDidMount() {
+    const {search} = this.props.location;
+    const {category} = queryString.parse(search);
+    if (category) this.setState({category})
+  }
 
   render() {
     return (
