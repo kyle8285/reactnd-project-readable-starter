@@ -76,9 +76,9 @@ class EditPostForm extends Component {
   }
 }
 
-function mapStateToProps({byId, categories}, ownProps) {
+function mapStateToProps({postsById, categories}, ownProps) {
   return {
-    post: byId[ownProps.match.params.id],
+    post: postsById[ownProps.match.params.id],
     categories,
   }
 }

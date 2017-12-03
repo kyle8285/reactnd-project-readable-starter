@@ -4,7 +4,7 @@ import { ADD_COMMENT, DELETE_COMMENT } from '../actions/comments';
 import { RECEIVE_POSTS, RECEIVE_POST, ADD_POST,
           EDIT_POST, DELETE_POST, } from '../actions/posts';
 
-export const byId = (state={}, action) => {
+export const postsById = (state={}, action) => {
   let postId;
   switch(action.type) {
     case RECEIVE_POST:
@@ -39,7 +39,7 @@ export const byId = (state={}, action) => {
   }
 }
 
-export const allIds = (state=[], action) => {
+export const postsAllIds = (state=[], action) => {
   switch(action.type) {
     case RECEIVE_POSTS:
       if (action.result) {

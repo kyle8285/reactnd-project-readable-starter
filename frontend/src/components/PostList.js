@@ -106,8 +106,8 @@ class PostList extends Component {
   }
 }
 
-function mapStateToProps({allIds, byId}, ownProps) {
-  let posts = allIds.map(id => byId[id]);
+function mapStateToProps({postsAllIds, postsById}, ownProps) {
+  let posts = postsAllIds.map(id => postsById[id]);
   const {category} = ownProps.match.params;
   if (category) {
     posts = posts.filter(post => post.category === category);

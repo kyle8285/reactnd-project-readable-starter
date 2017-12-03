@@ -72,9 +72,9 @@ class PostDetails extends Component {
   }
 }
 
-function mapStateToProps({byId, categories, commentsById}, ownProps) {
+function mapStateToProps({postsById, categories, commentsById}, ownProps) {
   return {
-    post: byId[ownProps.match.params.id],
+    post: postsById[ownProps.match.params.id],
     comments: Object.values(commentsById).filter(comment => (
       comment.parentId === ownProps.match.params.id
     )),
