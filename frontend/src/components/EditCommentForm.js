@@ -30,8 +30,13 @@ class EditCommentForm extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <textarea type="text" name="body" value={this.state.body} onChange={this.handleChange} autoFocus/>
-        <input type="submit" value="Submit"/>
+        <fieldset>
+          <label for='body'>Comment</label>
+          <textarea type="text" name="body" value={this.state.body} onChange={this.handleChange} autoFocus/>
+        </fieldset>
+        <fieldset>
+          <input type="submit" value="Submit"/>
+        </fieldset>
       </form>
 
     )

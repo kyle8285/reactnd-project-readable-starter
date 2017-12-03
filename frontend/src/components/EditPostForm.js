@@ -6,6 +6,7 @@ import { fetchPost, editPostApi } from '../actions/posts';
 
 class EditPostForm extends Component {
   state = {
+    author: '',
     title: '',
     category: '',
     body: '',
@@ -50,23 +51,30 @@ class EditPostForm extends Component {
         {!this.state.editPostSuccess
         ?
           <form onSubmit={this.handleSubmit}>
-            <label>
-              Title:
-              <input type="text" name="title" value={this.state.title} onChange={this.handleChange}/>
-            </label>
-            <label>
-              Category:
+            <fieldset disabled>
+              <label for='author'>Author</label>
+              <input type="text" name="author" value={this.state.author} onChange={this.handleChange}/>
+            </fieldset>
+            <fieldset>
+              <label for='title'>Title</label>
+              <input type="text" name="title" value={this.state.title} onChange={this.handleChange} autoFocus/>
+            </fieldset>
+            <fieldset>
+              <label>Category</label>
               <select name="category" value={this.state.category} onChange={this.handleChange}>
-                {this.props.categories.map((category, index) => (
-                  <option key={index} value={category.name}>{category.name}</option>
-                ))}
+              <option value={''} disabled>Select a category</option>
+              {this.props.categories.map(category => (
+                <option key={category.name} value={category.name}>{category.name}</option>
+              ))}
               </select>
-            </label>
-            <label>
-              Body:
+            </fieldset>
+            <fieldset>
+              <label for='body'>Body</label>
               <textarea type="text" name="body" value={this.state.body} onChange={this.handleChange}/>
-            </label>
-            <input type="submit" value="Submit"/>
+            </fieldset>
+            <fieldset>
+              <input type="submit" value="Submit"/>
+            </fieldset>
           </form>
         :
           <Redirect to={`/post/${this.props.match.params.id}`}/>

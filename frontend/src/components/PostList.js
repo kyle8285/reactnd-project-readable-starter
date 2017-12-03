@@ -80,7 +80,8 @@ class PostList extends Component {
           </div>
         ) : (
           <div>
-            <label>Order By:
+            <fieldset className='inline'>
+              <label>Order By</label>
               <select value={this.state.orderBy} name='orderBy' onChange={this.handleChange}>
                 <option value='timestamp'>Last Updated</option>
                 <option value='voteScore'>VoteScore</option>
@@ -89,13 +90,14 @@ class PostList extends Component {
                 <option value='author'>Author</option>
                 <option value='title'>Title</option>
               </select>
-            </label>
-            <label>Order:
+            </fieldset>
+            <fieldset className='inline'>
+              <label>Order</label>
               <select value={this.state.order} name='order' onChange={this.handleChange}>
                 <option value='desc'>Descending</option>
                 <option value='asc'>Ascending</option>
               </select>
-            </label>
+            </fieldset>
             <ul>
               {sortedPosts.map(post => <Post key={post.id} post={post} />)}
             </ul>
