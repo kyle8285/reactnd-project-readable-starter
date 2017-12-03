@@ -18,7 +18,7 @@ const Post = ({post}) => (
       <span className='weight-light small'>in </span>
       <span>{post.category} </span>
       <span className='weight-light small'>with </span>
-      <span>{post.commentCount} comments</span>
+      <span>{post.commentCount} <Link to={`/post/${post.id}`}>comments</Link></span>
     </div>
   </li>
 )
