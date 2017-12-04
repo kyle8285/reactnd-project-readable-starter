@@ -59,8 +59,8 @@ class PostDetails extends Component {
               <span>{post.commentCount} comments</span>
             </div>
             <p>{post.body}</p>
-            <button onClick={this.toggleAddComment}>Add Comment</button>
-            {addComment && <button onClick={this.toggleAddComment}>Cancel</button>}
+            <button className='btn btn-info' onClick={this.toggleAddComment}>Add Comment</button>
+            {addComment && <button className='btn btn-warning' onClick={this.toggleAddComment}>Cancel</button>}
             {addComment && <CommentForm postId={post.id} onAddCommentSuccess={this.toggleAddComment}/>}
             {sortedComments.map(comment => <Comment key={comment.id} comment={comment}/>)}
           </div>

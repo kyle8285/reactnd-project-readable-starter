@@ -73,6 +73,7 @@ select {
 input[type='submit'] {
   cursor: pointer;
   background-color: #68ca30;
+  border-color: transparent;
   color: white;
   transition: .2s;
 }
@@ -104,6 +105,33 @@ textarea:disabled {
   float: right;
 }
 
+.btn {
+  border: 1px solid transparent;
+  color: white;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.btn + .btn {
+  margin-left: 8px;
+}
+
+.btn-info {
+  background-color: #2196f3;
+}
+
+.btn-info:hover {
+  background-color: #0087f3;
+}
+
+.btn-warning {
+  background-color: #f44336;
+}
+
+.btn-warning:hover {
+  background-color: #f71201;
+}
+
 .btn-icon {
   border: none;
   background: none;
@@ -122,11 +150,19 @@ textarea:disabled {
 }
 
 .md-arrow-upward {
-  fill: green;
+  fill: #68ca30;
+}
+
+.md-arrow-upward:hover {
+  fill: #56a729;
 }
 
 .md-arrow-downward {
-  fill: red;
+  fill: #f44336;
+}
+
+.md-arrow-downward:hover {
+  fill: #f71201;
 }
 
 .font-small {
