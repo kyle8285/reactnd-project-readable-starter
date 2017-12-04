@@ -37,28 +37,30 @@ class PostDetails extends Component {
       <div>
       {post
         ? (
-          <div className='post-detail'>
-            <h3 className='title'>{post.title}</h3>
-            <span> <VoteScore post={post}/>{post.voteScore}</span>
-            <div>
-              <Link className='link-icon' to={`/post/${post.id}/edit`}>
-                <MdEdit/>
-              </Link>
-              <button className='btn-icon' onClick={this.handleDelete.bind(this, post.id)}>
-                <MdDelete/>
-              </button>
+          <div>
+            <div className='post-detail'>
+              <h3 className='title'>{post.title}</h3>
+              <span> <VoteScore post={post}/>{post.voteScore}</span>
+              <div>
+                <Link className='link-icon' to={`/post/${post.id}/edit`}>
+                  <MdEdit/>
+                </Link>
+                <button className='btn-icon' onClick={this.handleDelete.bind(this, post.id)}>
+                  <MdDelete/>
+                </button>
+              </div>
+              <div>
+                <span className='comment-author'>{post.author} </span>
+                <span className='weight-light font-small'>at {moment(post.timestamp).format('lll')}</span>
+              </div>
+              <div>
+                <span className='weight-light small'>in </span>
+                <span>{post.category} </span>
+                <span className='weight-light small'>with </span>
+                <span>{post.commentCount} comments</span>
+              </div>
+              <p>{post.body}</p>
             </div>
-            <div>
-              <span className='comment-author'>{post.author} </span>
-              <span className='weight-light font-small'>at {moment(post.timestamp).format('lll')}</span>
-            </div>
-            <div>
-              <span className='weight-light small'>in </span>
-              <span>{post.category} </span>
-              <span className='weight-light small'>with </span>
-              <span>{post.commentCount} comments</span>
-            </div>
-            <p>{post.body}</p>
             <button className='btn btn-info' onClick={this.toggleAddComment}>Add Comment</button>
             {addComment && <button className='btn btn-warning' onClick={this.toggleAddComment}>Cancel</button>}
             {addComment && <CommentForm postId={post.id} onAddCommentSuccess={this.toggleAddComment}/>}

@@ -5,7 +5,7 @@ import moment from 'moment';
 import VoteScore from './VoteScore';
 
 const Post = ({post}) => (
-  <li>
+  <li className='post'>
     <h3 className='title'>
       <Link to={`/post/${post.id}`}>{post.title}</Link>
     </h3>

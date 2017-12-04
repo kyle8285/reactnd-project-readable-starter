@@ -79,6 +79,7 @@ class PostList extends Component {
           </div>
         ) : (
           <div>
+            <div>
             <fieldset className='inline'>
               <label>Order By</label>
               <select value={this.state.orderBy} name='orderBy' onChange={this.handleChange}>
@@ -97,6 +98,7 @@ class PostList extends Component {
                 <option value='asc'>Ascending</option>
               </select>
             </fieldset>
+            </div>
             <ul>
               {sortedPosts.map(post => <Post key={post.id} post={post} />)}
             </ul>

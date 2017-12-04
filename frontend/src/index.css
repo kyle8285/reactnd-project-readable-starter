@@ -169,6 +169,24 @@ textarea:disabled {
   font-size: .85em;
 }
 
+.post {
+  padding-bottom: 16px;
+  border-bottom: 1px solid #eae9e9;
+}
+
+.post-detail {
+  margin-top: 16px;
+  padding: 16px;
+  background-color: #eae9e9;
+  border: 1px solid transparent;
+  border-radius: 1px;
+  margin-bottom: 16px;
+}
+
+.post-detail h3 {
+  margin-top: 0px;
+}
+
 .post-detail .btn-icon,
 .post-detail .link-icon {
   margin-left: 8px;
@@ -177,7 +195,9 @@ textarea:disabled {
 .comment {
   margin-top: 16px;
   padding: 16px;
-  border-top: 1px solid;
+  background-color: #eae9e9;
+  border: 1px solid transparent;
+  border-radius: 1px;
 }
 
 .comment .btn-icon {
@@ -193,5 +213,6 @@ textarea:disabled {
 }
 
 .comment-body {
-  padding-left: 16px;
+  margin-top: 16px;
+  margin-bottom: 0px;
 }
