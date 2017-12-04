@@ -17,10 +17,11 @@ class CommentForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    const {author, body} = this.state;
+    if (!author || !body) return;
     const id = `${Math.random().toString(36).substr(2)}${Math.random().toString(36).substr(2)}`;
     const parentId = this.props.postId;
     const timestamp = Date.now();
-    const {author, body} = this.state;
     this.props.addComment({id, parentId, timestamp, body, author})
       .then(() => this.props.onAddCommentSuccess());
   }

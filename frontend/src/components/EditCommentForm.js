@@ -21,8 +21,9 @@ class EditCommentForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    const {id, body} = this.state;
+    if (!body) return;
     const timestamp = Date.now();
-    const {id, body } = this.state;
     this.props.editComment({id, body, timestamp})
       .then(() => this.props.onSuccess());
   }
