@@ -52,11 +52,11 @@ class EditPostForm extends Component {
         ?
           <form onSubmit={this.handleSubmit}>
             <fieldset disabled>
-              <label for='author'>Author</label>
+              <label htmlFor='author'>Author</label>
               <input type="text" name="author" value={this.state.author} onChange={this.handleChange}/>
             </fieldset>
             <fieldset>
-              <label for='title'>Title</label>
+              <label htmlFor='title'>Title</label>
               <input type="text" name="title" value={this.state.title} onChange={this.handleChange} autoFocus/>
             </fieldset>
             <fieldset>
@@ -69,7 +69,7 @@ class EditPostForm extends Component {
               </select>
             </fieldset>
             <fieldset>
-              <label for='body'>Body</label>
+              <label htmlFor='body'>Body</label>
               <textarea type="text" name="body" value={this.state.body} onChange={this.handleChange}/>
             </fieldset>
             <fieldset>

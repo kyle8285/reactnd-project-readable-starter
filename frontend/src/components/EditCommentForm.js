@@ -31,7 +31,7 @@ class EditCommentForm extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <fieldset>
-          <label for='body'>Comment</label>
+          <label htmlFor='body'>Comment</label>
           <textarea type="text" name="body" value={this.state.body} onChange={this.handleChange} autoFocus/>
         </fieldset>
         <fieldset>
