@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const Category = ({category, match}) => (
   <li >
     <NavLink
-      to={`/category/${category.path}`}
+      to={`/${category.path}`}
       activeClassName='nav-active'
     >{category.name}</NavLink>
   </li>

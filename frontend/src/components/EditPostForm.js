@@ -77,7 +77,7 @@ class EditPostForm extends Component {
             </fieldset>
           </form>
         :
-          <Redirect to={`/post/${this.props.match.params.id}`}/>
+          <Redirect to={`/${this.state.category}/${this.props.match.params.id}`}/>
         }
       </div>
     )

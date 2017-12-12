@@ -74,7 +74,7 @@ class CreatePostForm extends Component {
             </fieldset>
           </form>
         :
-          <Redirect to={`/category/${this.state.category}`}/>
+          <Redirect to={`/${this.state.category}`}/>
         }
       </div>
     )

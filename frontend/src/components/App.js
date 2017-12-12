@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Navbar from './Navbar';
 import PostList from './PostList';
@@ -17,12 +17,10 @@ class App extends Component {
       <div className="container">
         <Route path='/' component={Navbar}/>
         <Route exact path='/' component={PostList}/>
-        <Route exact path='/category/:category' component={PostList}/>
-        <Switch>
-          <Route exact path='/post/create' component={CreatePostForm}/>
-          <Route exact path='/post/:id' component={PostDetails}/>
-        </Switch>
-        <Route exact path='/post/:id/edit' component={EditPostForm}/>
+        <Route exact path='/:category' component={PostList}/>
+        <Route exact path='/:category/:id' component={PostDetails}/>
+        <Route exact path='/:category/:id/edit' component={EditPostForm}/>
+        <Route exact path='/post/create' component={CreatePostForm}/>
       </div>
     )
   }

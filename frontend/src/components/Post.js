@@ -19,13 +19,13 @@ const Post = (props) => {
   return (
     <div className='post'>
       <h3 className='title'>
-        <Link to={`/post/${post.id}`}>{post.title}</Link>
+        <Link to={`/${post.category}/${post.id}`}>{post.title}</Link>
         <VoteScore post={post}/><span className='font-small'> {post.voteScore}</span>
       </h3>
       <div>
         <span className='comment-author'>{post.author} </span>
         <span className='weight-light font-small'>at {moment(post.timestamp).format('lll')}</span>
-        <Link className='link-icon' to={`/post/${post.id}/edit`}>
+        <Link className='link-icon' to={`/${post.category}/${post.id}/edit`}>
           <MdEdit/>
         </Link>
         <button className='btn-icon' onClick={() => handleDelete(post.id)}>
@@ -36,7 +36,7 @@ const Post = (props) => {
         <span className='weight-light small'>in </span>
         <span>{post.category} </span>
         <span className='weight-light small'>with </span>
-        <span>{post.commentCount} <Link to={`/post/${post.id}`}>comments</Link></span>
+        <span>{post.commentCount} <Link to={`/${post.category}/${post.id}`}>comments</Link></span>
       </div>
       {props.showBody && <p>{post.body}</p>}
     </div>
