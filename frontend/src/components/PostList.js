@@ -99,9 +99,9 @@ class PostList extends Component {
               </select>
             </fieldset>
             </div>
-            <ul>
+            <div>
               {sortedPosts.map(post => <Post key={post.id} post={post} />)}
-            </ul>
+            </div>
           </div>
         )}
       </div>
